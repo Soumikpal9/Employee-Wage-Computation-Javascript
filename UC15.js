@@ -1,9 +1,5 @@
 class EmployeePayrollData{
     //Property
-    id
-    salary
-    gender
-    startDate
 
     //Constructor
     constructor(...params){
@@ -15,15 +11,36 @@ class EmployeePayrollData{
     }
 
     //Getter and Setter Methods
-    get name(){
-        return this._name
+    get id(){return this._id;}
+    set id(id){
+        if(id > 0) this._id = id;
+        else throw "Invalid id";
     }
+
+    get name(){return this._name;}
     set name(name){
-        let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$')
-        if(nameRegex.test(name)){
-            this._name = name
-        }
-        else throw "Name is Incorrect!"
+        let nameRegex = RegExp("^[A-Z]{1}[a-z]{2,}$");
+        if(nameRegex.test(name))this._name = name;
+        else throw "Name is Incorrect";
+    }
+
+    get salary(){return this._salary;}
+    set salary(salary){
+        if(salary > 0) this._salary = salary;
+        else throw "Enter Valid salary";
+    }
+
+    get gender(){return this._gender;}
+    set gender(gender){
+        let genderRegex = RegExp("^[MF]$");
+        if(genderRegex.test(gender))this._gender = gender;
+        else throw "Enter Valid gender";
+    }
+
+    get startDate(){return this._startDate;}
+    set startDate(startDate){
+        if(startDate <= new Date())this._startDate = startDate;
+        else throw "Enter valid date";
     }
 
     //Method
@@ -46,4 +63,9 @@ catch(e){
 }
 
 let newEmployeePayrollData = new EmployeePayrollData(1, "Terissa", 30000, "F", new Date())
-console.log(newEmployeePayrollData.toString()) 
+try{
+    console.log(newEmployeePayrollData.toString()) 
+}
+catch(e){
+    console.error(e)
+}
